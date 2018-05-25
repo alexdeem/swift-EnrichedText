@@ -10,18 +10,13 @@ internal struct Scanner {
     let string : String
     let unicodeScalars : String.UnicodeScalarView
     var currentIndex : String.Index
-    var currentStyle : EnrichedTextStyle
-    var nofillCount : Int
-    var processNewlines : Bool {
-        return nofillCount == 0
-    }
+    var state : ScannerState
 
     public init(string: String) {
         self.string = string
         self.unicodeScalars = string.unicodeScalars
         self.currentIndex = string.startIndex
-        self.currentStyle = EnrichedTextStyle(options: [])
-        self.nofillCount = 0
+        self.state = ScannerState()
     }
 
     public var isComplete : Bool {
@@ -45,16 +40,16 @@ internal struct Scanner {
             return nil
         }
 
-        if (processNewlines && unicodeScalars[currentIndex] == "\n") {
+        if (state.processNewlines && unicodeScalars[currentIndex] == "\n") {
             currentIndex = unicodeScalars.index(after: currentIndex)
             if (unicodeScalars[currentIndex] != "\n") {
-                return EnrichedTextComponent(text: " ", style: currentStyle)
+                return EnrichedTextComponent(text: " ", style: state.style)
             }
         }
 
         let text = try scanText()
 
-        return EnrichedTextComponent(text: text, style: currentStyle)
+        return EnrichedTextComponent(text: text, style: state.style)
     }
 
     private mutating func scanAndProcessCommand() throws {
@@ -74,20 +69,12 @@ internal struct Scanner {
         currentIndex = unicodeScalars.index(after: endIndex)
 
         let command = string[startIndex..<endIndex]
-        if (command.caseInsensitiveCompare("nofill") == .orderedSame) {
-            if (negation) {
-                nofillCount -= 1
-            } else {
-                nofillCount += 1
-            }
-            return
-        }
 
         if (negation) {
-            currentStyle.negate(command: command)
+            state.negate(command: command)
         } else {
             let param = try scanParam()
-            currentStyle.apply(command: command, param: param)
+            state.apply(command: command, param: param)
         }
     }
 

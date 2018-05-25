@@ -17,32 +17,3 @@ public struct EnrichedTextStyleOptions : OptionSet {
 public struct EnrichedTextStyle {
     public var options: EnrichedTextStyleOptions
 }
-
-extension EnrichedTextStyle {
-    internal mutating func apply(command:Substring, param:Substring?) {
-        switch (command.lowercased()) {
-        case "bold":
-            options.insert(.bold)
-        case "italic":
-            options.insert(.italic)
-        case "underline":
-            options.insert(.underline)
-        default:
-            break
-        }
-    }
-
-    internal mutating func negate(command:Substring) {
-        switch (command.lowercased()) {
-        case "bold":
-            options.remove(.bold)
-        case "italic":
-            options.remove(.italic)
-        case "underline":
-            options.remove(.underline)
-        default:
-            break
-        }
-    }
-
-}

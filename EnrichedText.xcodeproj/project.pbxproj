@@ -28,6 +28,14 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		954064A020B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A120B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A220B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A320B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A420B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A520B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A620B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A720B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
 		954965BC20A8615300BD6E16 /* EnrichedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BAAD651F720CB3005F3D08 /* EnrichedText.swift */; };
 		954965BD20A8615300BD6E16 /* EnrichedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BAAD651F720CB3005F3D08 /* EnrichedText.swift */; };
 		958812462096A0980080D3D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958812452096A0980080D3D4 /* AppDelegate.swift */; };
@@ -267,6 +275,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9540649F20B7D11200312C1A /* ScannerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerState.swift; sourceTree = "<group>"; };
 		9549657B20A41AAD00BD6E16 /* EnrichedText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnrichedText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9549658D20A4230500BD6E16 /* EnrichedText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnrichedText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		954965D220AAA5B900BD6E16 /* DynamicLibTarget-ios.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "DynamicLibTarget-ios.xcconfig"; sourceTree = "<group>"; };
@@ -502,6 +511,7 @@
 			isa = PBXGroup;
 			children = (
 				9594C86120B3CC96000D74C7 /* Scanner.swift */,
+				9540649F20B7D11200312C1A /* ScannerState.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -1120,6 +1130,7 @@
 			files = (
 				9594C85D20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86620B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A420B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86F20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				954965BC20A8615300BD6E16 /* EnrichedText.swift in Sources */,
 			);
@@ -1131,6 +1142,7 @@
 			files = (
 				9594C85E20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86720B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A520B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C87020B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				954965BD20A8615300BD6E16 /* EnrichedText.swift in Sources */,
 			);
@@ -1151,6 +1163,7 @@
 			files = (
 				9594C85C20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86520B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A320B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86E20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				958812602096C39E0080D3D4 /* EnrichedText.swift in Sources */,
 			);
@@ -1171,6 +1184,7 @@
 			files = (
 				9594C85A20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86320B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A120B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86C20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				958812A12096E8FF0080D3D4 /* EnrichedText.swift in Sources */,
 			);
@@ -1214,6 +1228,7 @@
 			files = (
 				9594C85B20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86420B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A220B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86D20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				95AE3DDD2092FC2F004D6773 /* EnrichedText.swift in Sources */,
 			);
@@ -1225,6 +1240,7 @@
 			files = (
 				9594C85920B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86220B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A020B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86B20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				95BAAD661F720D04005F3D08 /* EnrichedText.swift in Sources */,
 			);
@@ -1245,6 +1261,7 @@
 			files = (
 				9594C85F20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86820B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A620B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C87120B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				95D06B9120AAB17F005D6947 /* EnrichedText.swift in Sources */,
 			);
@@ -1256,6 +1273,7 @@
 			files = (
 				9594C86020B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86920B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A720B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C87220B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				95D06B9220AAB17F005D6947 /* EnrichedText.swift in Sources */,
 			);
