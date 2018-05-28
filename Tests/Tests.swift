@@ -197,6 +197,20 @@ class Tests: XCTestCase {
         }
     }
 
+    func testUnbalancedCommands() {
+        let string = "The <bold><italic>red</bold></italic> sat on the hat."
+        do {
+            _ = try EnrichedText(string: string)
+            XCTFail()
+        } catch EnrichedText.Error.malformed(let position, let reason) {
+            XCTAssertEqual(reason, "Unbalanced Command Tag")
+            let characters = string[..<position].count
+            XCTAssertEqual(characters, 23)
+        } catch {
+            XCTFail()
+        }
+    }
+
     static let complexExample = """
         <bold>Now</bold> is the time for <italic>all</italic>
         good men

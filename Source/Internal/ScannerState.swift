@@ -3,42 +3,47 @@
 import Foundation
 
 struct ScannerState {
-    var style : EnrichedTextStyle = EnrichedTextStyle(options: [])
-    var nofillCount : Int = 0
+    var style : EnrichedTextStyle {
+        return stack.last!.style
+    }
     var processNewlines : Bool {
-        return nofillCount == 0
+        return !stack.last!.nofill
     }
-}
+    private var stack: [ScannerStateItem]
 
-extension ScannerState {
+    init() {
+        self.stack = [ScannerStateItem(style: EnrichedTextStyle(options: []), nofill: false, command: nil)]
+    }
+
     internal mutating func apply(command:Substring, param:Substring?) {
-        switch (command.lowercased()) {
+        var item = stack.last!
+
+        item.command = command.lowercased()
+        switch (item.command) {
         case "bold":
-            style.options.insert(.bold)
+            item.style.options.insert(.bold)
         case "italic":
-            style.options.insert(.italic)
+            item.style.options.insert(.italic)
         case "underline":
-            style.options.insert(.underline)
+            item.style.options.insert(.underline)
         case "nofill":
-            nofillCount += 1
+            item.nofill = true
         default:
             break
         }
+
+        stack.append(item)
     }
 
-    internal mutating func negate(command:Substring) {
-        switch (command.lowercased()) {
-        case "bold":
-            style.options.remove(.bold)
-        case "italic":
-            style.options.remove(.italic)
-        case "underline":
-            style.options.remove(.underline)
-        case "nofill":
-            nofillCount -= 1
-        default:
-            break
-        }
+    internal mutating func negate(command:Substring) -> Bool {
+        let item = stack.popLast()!
+        return item.command == command.lowercased()
     }
-
 }
+
+private struct ScannerStateItem {
+    var style : EnrichedTextStyle
+    var nofill : Bool
+    var command : String?
+}
+

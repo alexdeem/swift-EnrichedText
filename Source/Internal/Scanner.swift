@@ -71,7 +71,9 @@ internal struct Scanner {
         let command = string[startIndex..<endIndex]
 
         if (negation) {
-            state.negate(command: command)
+            if (!state.negate(command: command)) {
+                throw EnrichedText.Error.malformed(position: startIndex, reason: "Unbalanced Command Tag")
+            }
         } else {
             let param = try scanParam()
             state.apply(command: command, param: param)
