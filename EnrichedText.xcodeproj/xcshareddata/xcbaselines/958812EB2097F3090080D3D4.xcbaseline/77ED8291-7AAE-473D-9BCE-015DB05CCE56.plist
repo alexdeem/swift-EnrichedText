@@ -16,6 +16,26 @@
 					<string>28 May 2018 at 11:45:13 am</string>
 				</dict>
 			</dict>
+			<key>testLowercaseInitPerformance()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.27088</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>28 May 2018 at 1:48:40 pm</string>
+				</dict>
+			</dict>
+			<key>testMixedCaseInitPerformance()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.29126</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>28 May 2018 at 1:48:40 pm</string>
+				</dict>
+			</dict>
 		</dict>
 	</dict>
 </dict>

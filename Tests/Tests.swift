@@ -234,6 +234,29 @@ class Tests: XCTestCase {
 
         -- the end
         """
+    static let complexMixedCaseExample = """
+        <BoLd>Now</bOLd> is the time for <itaLIc>all</ItalIc>
+        good men
+        <sMAllER>(and <<women>)</smallER> to
+        <iGNoreme>come</ignoREME>
+
+        to the aid of their
+
+
+        <COlor><PARAm>red</paRAM>beloved</coLOr>
+        country.
+
+        By the way,
+        I think that <paRAindeNT><paRAm>left</pARAm><<smaller>
+
+        </paraIndent>should REALLY be called
+
+        <paraINDent><paRam>left</pAram><<tinier></paRAIndent>
+
+        and that I am always right.
+
+        -- the end
+        """
     static let complexExpectedOutput = """
         Now is the time for all good men (and <women>) to come
         to the aid of their
@@ -299,10 +322,18 @@ class Tests: XCTestCase {
         XCTAssertEqual(object["a"], expectedEnhancedText)
     }
 
-    func testInitPerformance() {
+    func testLowercaseInitPerformance() {
         self.measure {
             for _ in 1...5000 {
                 _ = try! EnrichedText(string: Tests.complexExample)
+            }
+        }
+    }
+
+    func testMixedCaseInitPerformance() {
+        self.measure {
+            for _ in 1...5000 {
+                _ = try! EnrichedText(string: Tests.complexMixedCaseExample)
             }
         }
     }
