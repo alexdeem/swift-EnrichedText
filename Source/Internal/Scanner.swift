@@ -92,7 +92,13 @@ internal struct Scanner {
                 }
             }
 
-            state.apply(command: command, param: param)
+            do {
+                try state.apply(command: command, param: param)
+            } catch ScannerState.Error.missingParam {
+                throw EnrichedText.Error.malformed(position: currentIndex, reason: "\(command) command requires param")
+            } catch ScannerState.Error.invalidParam {
+                throw EnrichedText.Error.malformed(position: currentIndex, reason: "\(command) param invalid")
+            }
 
             if (processNextCommand) {
                 if let (nextCommand, nextCommandNegation) = nextCommandObj {
