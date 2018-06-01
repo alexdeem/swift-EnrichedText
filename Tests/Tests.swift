@@ -275,6 +275,12 @@ class Tests: XCTestCase {
         XCTAssertEqual(enrichedText.plainText, expected)
     }
 
+    func testComplexMixedCase() {
+        let enrichedText = try! EnrichedText(string: Tests.complexMixedCaseExample)
+        let expected = Tests.complexExpectedOutput
+        XCTAssertEqual(enrichedText.plainText, expected)
+    }
+
     func testCustomStringConvertible() {
         let enrichedText = try! EnrichedText(string: "The <bold>cat</bold> sat on the hat.")
         XCTAssertEqual(enrichedText.description, "The <bold>cat</bold> sat on the hat.")

@@ -2,6 +2,7 @@
 
 import Foundation
 
+private let commandOpenCharacterSet = CharacterSet(charactersIn:"<")
 private let invertedPlainTextCharacterSet = CharacterSet(charactersIn:"<\n")
 private let commandCharacterSet = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "-"))
 private let invertedCommandCharacterSet = commandCharacterSet.inverted
@@ -81,23 +82,41 @@ internal struct Scanner {
                 throw EnrichedText.Error.malformed(position: currentIndex, reason: "Unbalanced Command Tag")
             }
         } else {
-            let param = try scanParam()
+            var param : Substring? = nil
+            var processNextCommand : Bool = true
+            let nextCommandObj = try scanCommand()
+            if let (nextCommand, nextCommandNegation) = nextCommandObj {
+                if (nextCommand.lowercased() == "param" && nextCommandNegation == false) {
+                    param = try scanParam()
+                    processNextCommand = false
+                }
+            }
+
             state.apply(command: command, param: param)
+
+            if (processNextCommand) {
+                if let (nextCommand, nextCommandNegation) = nextCommandObj {
+                    try processCommand(nextCommand, negation: nextCommandNegation)
+                }
+            }
         }
     }
 
-    private mutating func scanParam() throws -> Substring? {
-        if (unicodeScalars.suffix(from: currentIndex).starts(with: "<param>".unicodeScalars)) {
-            currentIndex = unicodeScalars.index(currentIndex, offsetBy:7)
-            let paramStartIndex = currentIndex
-            guard let closingParamRange = string.suffix(from: currentIndex).range(of:"</param>") else {
-                throw EnrichedText.Error.malformed(position: paramStartIndex, reason: "Expected </param> not found")
+    private mutating func scanParam() throws -> Substring {
+        let startIndex = currentIndex
+        var endIndex = currentIndex
+        while (currentIndex < unicodeScalars.endIndex) {
+            currentIndex = scanUpTo(characterSet: commandOpenCharacterSet)
+            endIndex = currentIndex
+            if let (command, negation) = try scanCommand() {
+                if (command.lowercased() == "param" && negation == true) {
+                    return string[startIndex..<endIndex]
+                }
+            } else {
+                currentIndex = unicodeScalars.index(after: currentIndex)
             }
-            let paramAfterEndIndex = closingParamRange.lowerBound
-            currentIndex = closingParamRange.upperBound
-            return string[paramStartIndex..<paramAfterEndIndex]
         }
-        return nil
+        throw EnrichedText.Error.malformed(position: startIndex, reason: "Expected </param> not found")
     }
 
     private mutating func scanText() throws -> Substring {
