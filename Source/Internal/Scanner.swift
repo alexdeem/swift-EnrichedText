@@ -26,14 +26,8 @@ internal struct Scanner {
     }
 
     public mutating func scanComponent() throws -> EnrichedTextComponent? {
-
-        while (unicodeScalars[currentIndex] == "<") {
-            currentIndex = unicodeScalars.index(after: currentIndex)
-            if (unicodeScalars[currentIndex] == "<") {
-                // This is an escaped < character; treat it as text
-                break;
-            }
-            try scanAndProcessCommand()
+        while let (command, negation) = try scanCommand() {
+            try processCommand(command, negation: negation)
         }
 
         if currentIndex >= unicodeScalars.endIndex {
@@ -52,7 +46,16 @@ internal struct Scanner {
         return EnrichedTextComponent(text: text, style: state.style)
     }
 
-    private mutating func scanAndProcessCommand() throws {
+    private mutating func scanCommand() throws -> (command: Substring, negation: Bool)? {
+        if (unicodeScalars[currentIndex] != "<") {
+            return nil;
+        }
+        currentIndex = unicodeScalars.index(after: currentIndex)
+        if (unicodeScalars[currentIndex] == "<") {
+            // This is an escaped < character; treat it as text
+            return nil;
+        }
+
         let negation = (unicodeScalars[currentIndex] == "/")
         if (negation) {
             currentIndex = unicodeScalars.index(after: currentIndex)
@@ -69,10 +72,13 @@ internal struct Scanner {
         currentIndex = unicodeScalars.index(after: endIndex)
 
         let command = string[startIndex..<endIndex]
+        return (command, negation)
+    }
 
+    private mutating func processCommand(_ command: Substring, negation: Bool) throws {
         if (negation) {
             if (!state.negate(command: command)) {
-                throw EnrichedText.Error.malformed(position: startIndex, reason: "Unbalanced Command Tag")
+                throw EnrichedText.Error.malformed(position: currentIndex, reason: "Unbalanced Command Tag")
             }
         } else {
             let param = try scanParam()

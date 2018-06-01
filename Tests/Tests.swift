@@ -205,7 +205,7 @@ class Tests: XCTestCase {
         } catch EnrichedText.Error.malformed(let position, let reason) {
             XCTAssertEqual(reason, "Unbalanced Command Tag")
             let characters = string[..<position].count
-            XCTAssertEqual(characters, 23)
+            XCTAssertEqual(characters, 28)
         } catch {
             XCTFail()
         }
