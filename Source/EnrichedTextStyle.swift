@@ -8,41 +8,23 @@ public struct EnrichedTextStyleOptions : OptionSet {
     public static let bold = EnrichedTextStyleOptions(rawValue: 1 << 0)
     public static let italic = EnrichedTextStyleOptions(rawValue: 1 << 1)
     public static let underline = EnrichedTextStyleOptions(rawValue: 1 << 2)
+    public static let fixed = EnrichedTextStyleOptions(rawValue: 1 << 3)
 
     public init(rawValue:Int) {
         self.rawValue = rawValue
     }
 }
 
-public struct EnrichedTextStyle {
+public struct EnrichedTextStyle : Equatable {
     public var options: EnrichedTextStyleOptions
-}
+    public var fontFamily: String?
+    public var color: EnrichedTextColor?
+    public var relativeFontSize: Int
 
-extension EnrichedTextStyle {
-    internal mutating func apply(command:Substring, param:Substring?) {
-        switch (command.lowercased()) {
-        case "bold":
-            options.insert(.bold)
-        case "italic":
-            options.insert(.italic)
-        case "underline":
-            options.insert(.underline)
-        default:
-            break
-        }
+    init() {
+        options = []
+        fontFamily = nil
+        color = nil
+        relativeFontSize = 0
     }
-
-    internal mutating func negate(command:Substring) {
-        switch (command.lowercased()) {
-        case "bold":
-            options.remove(.bold)
-        case "italic":
-            options.remove(.italic)
-        case "underline":
-            options.remove(.underline)
-        default:
-            break
-        }
-    }
-
 }

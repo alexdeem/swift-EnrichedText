@@ -38,6 +38,14 @@
                BlueprintName = "Tests-ios"
                ReferencedContainer = "container:EnrichedText.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "Tests/testLowercaseInitPerformance()">
+               </Test>
+               <Test
+                  Identifier = "Tests/testMixedCaseInitPerformance()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

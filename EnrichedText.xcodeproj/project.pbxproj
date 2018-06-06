@@ -28,6 +28,14 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		954064A020B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A120B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A220B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A320B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A420B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A520B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A620B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
+		954064A720B7D11200312C1A /* ScannerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9540649F20B7D11200312C1A /* ScannerState.swift */; };
 		954965BC20A8615300BD6E16 /* EnrichedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BAAD651F720CB3005F3D08 /* EnrichedText.swift */; };
 		954965BD20A8615300BD6E16 /* EnrichedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BAAD651F720CB3005F3D08 /* EnrichedText.swift */; };
 		958812462096A0980080D3D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958812452096A0980080D3D4 /* AppDelegate.swift */; };
@@ -73,6 +81,17 @@
 		9594C87020B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594C86A20B3D02B000D74C7 /* EnrichedTextStyle.swift */; };
 		9594C87120B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594C86A20B3D02B000D74C7 /* EnrichedTextStyle.swift */; };
 		9594C87220B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594C86A20B3D02B000D74C7 /* EnrichedTextStyle.swift */; };
+		959614D920C5004E00643601 /* EnrichedTextColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959614D820C5004E00643601 /* EnrichedTextColorTests.swift */; };
+		959614DA20C5004E00643601 /* EnrichedTextColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959614D820C5004E00643601 /* EnrichedTextColorTests.swift */; };
+		959614DB20C5004E00643601 /* EnrichedTextColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959614D820C5004E00643601 /* EnrichedTextColorTests.swift */; };
+		95A703F720C016E700973EF6 /* EnrichedTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A703F620C016E700973EF6 /* EnrichedTextColor.swift */; };
+		95A703F820C016E700973EF6 /* EnrichedTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A703F620C016E700973EF6 /* EnrichedTextColor.swift */; };
+		95A703F920C016E700973EF6 /* EnrichedTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A703F620C016E700973EF6 /* EnrichedTextColor.swift */; };
+		95A703FA20C016E700973EF6 /* EnrichedTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A703F620C016E700973EF6 /* EnrichedTextColor.swift */; };
+		95A703FB20C016E700973EF6 /* EnrichedTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A703F620C016E700973EF6 /* EnrichedTextColor.swift */; };
+		95A703FC20C016E700973EF6 /* EnrichedTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A703F620C016E700973EF6 /* EnrichedTextColor.swift */; };
+		95A703FD20C016E700973EF6 /* EnrichedTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A703F620C016E700973EF6 /* EnrichedTextColor.swift */; };
+		95A703FE20C016E700973EF6 /* EnrichedTextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A703F620C016E700973EF6 /* EnrichedTextColor.swift */; };
 		95AE3DDD2092FC2F004D6773 /* EnrichedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BAAD651F720CB3005F3D08 /* EnrichedText.swift */; };
 		95BAAD661F720D04005F3D08 /* EnrichedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BAAD651F720CB3005F3D08 /* EnrichedText.swift */; };
 		95C591891F6F7C1200C4405A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C591881F6F7C1200C4405A /* AppDelegate.swift */; };
@@ -267,6 +286,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9540649F20B7D11200312C1A /* ScannerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerState.swift; sourceTree = "<group>"; };
 		9549657B20A41AAD00BD6E16 /* EnrichedText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnrichedText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9549658D20A4230500BD6E16 /* EnrichedText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnrichedText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		954965D220AAA5B900BD6E16 /* DynamicLibTarget-ios.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "DynamicLibTarget-ios.xcconfig"; sourceTree = "<group>"; };
@@ -309,6 +329,8 @@
 		9594C85820B3CABD000D74C7 /* EnrichedTextComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrichedTextComponent.swift; sourceTree = "<group>"; };
 		9594C86120B3CC96000D74C7 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		9594C86A20B3D02B000D74C7 /* EnrichedTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrichedTextStyle.swift; sourceTree = "<group>"; };
+		959614D820C5004E00643601 /* EnrichedTextColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrichedTextColorTests.swift; sourceTree = "<group>"; };
+		95A703F620C016E700973EF6 /* EnrichedTextColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrichedTextColor.swift; sourceTree = "<group>"; };
 		95AE3DD62092FC0F004D6773 /* libEnrichedText-tv.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEnrichedText-tv.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		95BAAD651F720CB3005F3D08 /* EnrichedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrichedText.swift; sourceTree = "<group>"; };
 		95C591721F6F7A1100C4405A /* libEnrichedText-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEnrichedText-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -493,6 +515,7 @@
 			isa = PBXGroup;
 			children = (
 				958812D6209745FE0080D3D4 /* Tests.swift */,
+				959614D820C5004E00643601 /* EnrichedTextColorTests.swift */,
 				958812D8209745FE0080D3D4 /* Info.plist */,
 			);
 			path = Tests;
@@ -502,6 +525,7 @@
 			isa = PBXGroup;
 			children = (
 				9594C86120B3CC96000D74C7 /* Scanner.swift */,
+				9540649F20B7D11200312C1A /* ScannerState.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -550,6 +574,7 @@
 				95BAAD651F720CB3005F3D08 /* EnrichedText.swift */,
 				9594C85820B3CABD000D74C7 /* EnrichedTextComponent.swift */,
 				9594C86A20B3D02B000D74C7 /* EnrichedTextStyle.swift */,
+				95A703F620C016E700973EF6 /* EnrichedTextColor.swift */,
 				9594C85720B3CABD000D74C7 /* Internal */,
 				95D06BA120AAB407005D6947 /* DynamicFrameworkInfo.plist */,
 			);
@@ -1118,8 +1143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A703FB20C016E700973EF6 /* EnrichedTextColor.swift in Sources */,
 				9594C85D20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86620B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A420B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86F20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				954965BC20A8615300BD6E16 /* EnrichedText.swift in Sources */,
 			);
@@ -1129,8 +1156,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A703FC20C016E700973EF6 /* EnrichedTextColor.swift in Sources */,
 				9594C85E20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86720B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A520B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C87020B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				954965BD20A8615300BD6E16 /* EnrichedText.swift in Sources */,
 			);
@@ -1149,8 +1178,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A703FA20C016E700973EF6 /* EnrichedTextColor.swift in Sources */,
 				9594C85C20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86520B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A320B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86E20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				958812602096C39E0080D3D4 /* EnrichedText.swift in Sources */,
 			);
@@ -1169,8 +1200,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A703F820C016E700973EF6 /* EnrichedTextColor.swift in Sources */,
 				9594C85A20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86320B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A120B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86C20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				958812A12096E8FF0080D3D4 /* EnrichedText.swift in Sources */,
 			);
@@ -1188,6 +1221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				959614D920C5004E00643601 /* EnrichedTextColorTests.swift in Sources */,
 				958812D7209745FE0080D3D4 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1196,6 +1230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				959614DA20C5004E00643601 /* EnrichedTextColorTests.swift in Sources */,
 				958812F72097F32D0080D3D4 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1204,6 +1239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				959614DB20C5004E00643601 /* EnrichedTextColorTests.swift in Sources */,
 				9588130C2097F8CB0080D3D4 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1212,8 +1248,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A703F920C016E700973EF6 /* EnrichedTextColor.swift in Sources */,
 				9594C85B20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86420B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A220B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86D20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				95AE3DDD2092FC2F004D6773 /* EnrichedText.swift in Sources */,
 			);
@@ -1223,8 +1261,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A703F720C016E700973EF6 /* EnrichedTextColor.swift in Sources */,
 				9594C85920B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86220B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A020B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C86B20B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				95BAAD661F720D04005F3D08 /* EnrichedText.swift in Sources */,
 			);
@@ -1243,8 +1283,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A703FD20C016E700973EF6 /* EnrichedTextColor.swift in Sources */,
 				9594C85F20B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86820B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A620B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C87120B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				95D06B9120AAB17F005D6947 /* EnrichedText.swift in Sources */,
 			);
@@ -1254,8 +1296,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A703FE20C016E700973EF6 /* EnrichedTextColor.swift in Sources */,
 				9594C86020B3CABD000D74C7 /* EnrichedTextComponent.swift in Sources */,
 				9594C86920B3CC96000D74C7 /* Scanner.swift in Sources */,
+				954064A720B7D11200312C1A /* ScannerState.swift in Sources */,
 				9594C87220B3D02B000D74C7 /* EnrichedTextStyle.swift in Sources */,
 				95D06B9220AAB17F005D6947 /* EnrichedText.swift in Sources */,
 			);

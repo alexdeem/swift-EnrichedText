@@ -21,7 +21,7 @@ class Tests: XCTestCase {
         XCTAssertEqual(enrichedText.components[0].style.options, [])
     }
 
-    func testBoldText() {
+    func testBold() {
         let enrichedText = try! EnrichedText(string: "The <bold>cat</bold> sat on the hat.")
         XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
         XCTAssertEqual(enrichedText.components.count, 3)
@@ -31,6 +31,138 @@ class Tests: XCTestCase {
         XCTAssertEqual(enrichedText.components[1].style.options, [.bold])
         XCTAssertEqual(enrichedText.components[2].text, " sat on the hat.")
         XCTAssertEqual(enrichedText.components[2].style.options, [])
+    }
+
+    func testItalic() {
+        let enrichedText = try! EnrichedText(string: "The <italic>cat</italic> sat on the hat.")
+        XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
+        XCTAssertEqual(enrichedText.components.count, 3)
+        XCTAssertEqual(enrichedText.components[0].text, "The ")
+        XCTAssertEqual(enrichedText.components[0].style.options, [])
+        XCTAssertEqual(enrichedText.components[1].text, "cat")
+        XCTAssertEqual(enrichedText.components[1].style.options, [.italic])
+        XCTAssertEqual(enrichedText.components[2].text, " sat on the hat.")
+        XCTAssertEqual(enrichedText.components[2].style.options, [])
+    }
+
+    func testUnderline() {
+        let enrichedText = try! EnrichedText(string: "The <underline>cat</underline> sat on the hat.")
+        XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
+        XCTAssertEqual(enrichedText.components.count, 3)
+        XCTAssertEqual(enrichedText.components[0].text, "The ")
+        XCTAssertEqual(enrichedText.components[0].style.options, [])
+        XCTAssertEqual(enrichedText.components[1].text, "cat")
+        XCTAssertEqual(enrichedText.components[1].style.options, [.underline])
+        XCTAssertEqual(enrichedText.components[2].text, " sat on the hat.")
+        XCTAssertEqual(enrichedText.components[2].style.options, [])
+    }
+
+    func testFixed() {
+        let enrichedText = try! EnrichedText(string: "The <fixed>cat</fixed> sat on the hat.")
+        XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
+        XCTAssertEqual(enrichedText.components.count, 3)
+        XCTAssertEqual(enrichedText.components[0].text, "The ")
+        XCTAssertEqual(enrichedText.components[0].style.options, [])
+        XCTAssertEqual(enrichedText.components[1].text, "cat")
+        XCTAssertEqual(enrichedText.components[1].style.options, [.fixed])
+        XCTAssertEqual(enrichedText.components[2].text, " sat on the hat.")
+        XCTAssertEqual(enrichedText.components[2].style.options, [])
+    }
+
+    func testFontFamily() {
+        let enrichedText = try! EnrichedText(string: "The <fontfamily><param>times</param>cat</fontfamily> sat on the hat.")
+        XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
+        XCTAssertEqual(enrichedText.components.count, 3)
+        XCTAssertEqual(enrichedText.components[0].text, "The ")
+        XCTAssertEqual(enrichedText.components[0].style.options, [])
+        XCTAssertEqual(enrichedText.components[0].style.fontFamily, nil)
+        XCTAssertEqual(enrichedText.components[1].text, "cat")
+        XCTAssertEqual(enrichedText.components[1].style.options, [])
+        XCTAssertEqual(enrichedText.components[1].style.fontFamily, "times")
+        XCTAssertEqual(enrichedText.components[2].text, " sat on the hat.")
+        XCTAssertEqual(enrichedText.components[2].style.options, [])
+        XCTAssertEqual(enrichedText.components[2].style.fontFamily, nil)
+    }
+
+    func testColor() {
+        let enrichedText = try! EnrichedText(string: "The <color><param>red</param>cat</color> sat on the hat.")
+        XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
+        XCTAssertEqual(enrichedText.components.count, 3)
+        XCTAssertEqual(enrichedText.components[0].text, "The ")
+        XCTAssertEqual(enrichedText.components[0].style.options, [])
+        XCTAssertEqual(enrichedText.components[0].style.color, nil)
+        XCTAssertEqual(enrichedText.components[1].text, "cat")
+        XCTAssertEqual(enrichedText.components[1].style.options, [])
+        XCTAssertEqual(enrichedText.components[1].style.color, EnrichedTextColor(string: "red"))
+        XCTAssertEqual(enrichedText.components[2].text, " sat on the hat.")
+        XCTAssertEqual(enrichedText.components[2].style.options, [])
+        XCTAssertEqual(enrichedText.components[2].style.color, nil)
+    }
+
+    func testSmaller() {
+        let enrichedText = try! EnrichedText(string: "The <smaller>cat</smaller> sat on the hat.")
+        XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
+        XCTAssertEqual(enrichedText.components.count, 3)
+        XCTAssertEqual(enrichedText.components[0].text, "The ")
+        XCTAssertEqual(enrichedText.components[0].style.options, [])
+        XCTAssertEqual(enrichedText.components[0].style.relativeFontSize, 0)
+        XCTAssertEqual(enrichedText.components[1].text, "cat")
+        XCTAssertEqual(enrichedText.components[1].style.options, [])
+        XCTAssertEqual(enrichedText.components[1].style.relativeFontSize, -1)
+        XCTAssertEqual(enrichedText.components[2].text, " sat on the hat.")
+        XCTAssertEqual(enrichedText.components[2].style.options, [])
+        XCTAssertEqual(enrichedText.components[2].style.relativeFontSize, 0)
+    }
+
+    func testNestedSmaller() {
+        let enrichedText = try! EnrichedText(string: "The <smaller>cat <smaller>sat</smaller></smaller> on the hat.")
+        XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
+        XCTAssertEqual(enrichedText.components.count, 4)
+        XCTAssertEqual(enrichedText.components[0].text, "The ")
+        XCTAssertEqual(enrichedText.components[0].style.options, [])
+        XCTAssertEqual(enrichedText.components[0].style.relativeFontSize, 0)
+        XCTAssertEqual(enrichedText.components[1].text, "cat ")
+        XCTAssertEqual(enrichedText.components[1].style.options, [])
+        XCTAssertEqual(enrichedText.components[1].style.relativeFontSize, -1)
+        XCTAssertEqual(enrichedText.components[2].text, "sat")
+        XCTAssertEqual(enrichedText.components[2].style.options, [])
+        XCTAssertEqual(enrichedText.components[2].style.relativeFontSize, -2)
+        XCTAssertEqual(enrichedText.components[3].text, " on the hat.")
+        XCTAssertEqual(enrichedText.components[3].style.options, [])
+        XCTAssertEqual(enrichedText.components[3].style.relativeFontSize, 0)
+    }
+
+    func testBigger() {
+        let enrichedText = try! EnrichedText(string: "The <bigger>cat</bigger> sat on the hat.")
+        XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
+        XCTAssertEqual(enrichedText.components.count, 3)
+        XCTAssertEqual(enrichedText.components[0].text, "The ")
+        XCTAssertEqual(enrichedText.components[0].style.options, [])
+        XCTAssertEqual(enrichedText.components[0].style.relativeFontSize, 0)
+        XCTAssertEqual(enrichedText.components[1].text, "cat")
+        XCTAssertEqual(enrichedText.components[1].style.options, [])
+        XCTAssertEqual(enrichedText.components[1].style.relativeFontSize, 1)
+        XCTAssertEqual(enrichedText.components[2].text, " sat on the hat.")
+        XCTAssertEqual(enrichedText.components[2].style.options, [])
+        XCTAssertEqual(enrichedText.components[2].style.relativeFontSize, 0)
+    }
+
+    func testNestedBigger() {
+        let enrichedText = try! EnrichedText(string: "The <bigger>cat <bigger>sat</bigger></bigger> on the hat.")
+        XCTAssertEqual(enrichedText.plainText, "The cat sat on the hat.")
+        XCTAssertEqual(enrichedText.components.count, 4)
+        XCTAssertEqual(enrichedText.components[0].text, "The ")
+        XCTAssertEqual(enrichedText.components[0].style.options, [])
+        XCTAssertEqual(enrichedText.components[0].style.relativeFontSize, 0)
+        XCTAssertEqual(enrichedText.components[1].text, "cat ")
+        XCTAssertEqual(enrichedText.components[1].style.options, [])
+        XCTAssertEqual(enrichedText.components[1].style.relativeFontSize, 1)
+        XCTAssertEqual(enrichedText.components[2].text, "sat")
+        XCTAssertEqual(enrichedText.components[2].style.options, [])
+        XCTAssertEqual(enrichedText.components[2].style.relativeFontSize, 2)
+        XCTAssertEqual(enrichedText.components[3].text, " on the hat.")
+        XCTAssertEqual(enrichedText.components[3].style.options, [])
+        XCTAssertEqual(enrichedText.components[3].style.relativeFontSize, 0)
     }
 
     func testNesting() {
@@ -197,6 +329,20 @@ class Tests: XCTestCase {
         }
     }
 
+    func testUnbalancedCommands() {
+        let string = "The <bold><italic>red</bold></italic> sat on the hat."
+        do {
+            _ = try EnrichedText(string: string)
+            XCTFail()
+        } catch EnrichedText.Error.malformed(let position, let reason) {
+            XCTAssertEqual(reason, "Unbalanced Command Tag")
+            let characters = string[..<position].count
+            XCTAssertEqual(characters, 28)
+        } catch {
+            XCTFail()
+        }
+    }
+
     static let complexExample = """
         <bold>Now</bold> is the time for <italic>all</italic>
         good men
@@ -220,6 +366,29 @@ class Tests: XCTestCase {
 
         -- the end
         """
+    static let complexMixedCaseExample = """
+        <BoLd>Now</bOLd> is the time for <itaLIc>all</ItalIc>
+        good men
+        <sMAllER>(and <<women>)</smallER> to
+        <iGNoreme>come</ignoREME>
+
+        to the aid of their
+
+
+        <COlor><PARAm>red</paRAM>beloved</coLOr>
+        country.
+
+        By the way,
+        I think that <paRAindeNT><paRAm>left</pARAm><<smaller>
+
+        </paraIndent>should REALLY be called
+
+        <paraINDent><paRam>left</pAram><<tinier></paRAIndent>
+
+        and that I am always right.
+
+        -- the end
+        """
     static let complexExpectedOutput = """
         Now is the time for all good men (and <women>) to come
         to the aid of their
@@ -236,6 +405,54 @@ class Tests: XCTestCase {
         let enrichedText = try! EnrichedText(string: Tests.complexExample)
         let expected = Tests.complexExpectedOutput
         XCTAssertEqual(enrichedText.plainText, expected)
+    }
+
+    func testComplexMixedCase() {
+        let enrichedText = try! EnrichedText(string: Tests.complexMixedCaseExample)
+        let expected = Tests.complexExpectedOutput
+        XCTAssertEqual(enrichedText.plainText, expected)
+    }
+
+    func testMissingColorParam() {
+        let string = "The <color>cat</color> sat on the hat."
+        do {
+            _ = try EnrichedText(string: string)
+            XCTFail()
+        } catch EnrichedText.Error.malformed(let position, let reason) {
+            XCTAssertEqual(reason, "color command requires param")
+            let characters = string[..<position].count
+            XCTAssertEqual(characters, 11)
+        } catch {
+            XCTFail()
+        }
+    }
+
+    func testMissingFontFamilyParam() {
+        let string = "The <fontfamily>cat</fontfamily> sat on the hat."
+        do {
+            _ = try EnrichedText(string: string)
+            XCTFail()
+        } catch EnrichedText.Error.malformed(let position, let reason) {
+            XCTAssertEqual(reason, "fontfamily command requires param")
+            let characters = string[..<position].count
+            XCTAssertEqual(characters, 16)
+        } catch {
+            XCTFail()
+        }
+    }
+
+    func testInvalidParam() {
+        let string = "The <color><param>burgandy</param>cat</color> sat on the hat."
+        do {
+            _ = try EnrichedText(string: string)
+            XCTFail()
+        } catch EnrichedText.Error.malformed(let position, let reason) {
+            XCTAssertEqual(reason, "color param invalid")
+            let characters = string[..<position].count
+            XCTAssertEqual(characters, 34)
+        } catch {
+            XCTFail()
+        }
     }
 
     func testCustomStringConvertible() {
@@ -285,10 +502,18 @@ class Tests: XCTestCase {
         XCTAssertEqual(object["a"], expectedEnhancedText)
     }
 
-    func testInitPerformance() {
+    func testLowercaseInitPerformance() {
         self.measure {
             for _ in 1...5000 {
                 _ = try! EnrichedText(string: Tests.complexExample)
+            }
+        }
+    }
+
+    func testMixedCaseInitPerformance() {
+        self.measure {
+            for _ in 1...5000 {
+                _ = try! EnrichedText(string: Tests.complexMixedCaseExample)
             }
         }
     }

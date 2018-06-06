@@ -2,6 +2,7 @@
 
 import Foundation
 
+private let commandOpenCharacterSet = CharacterSet(charactersIn:"<")
 private let invertedPlainTextCharacterSet = CharacterSet(charactersIn:"<\n")
 private let commandCharacterSet = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "-"))
 private let invertedCommandCharacterSet = commandCharacterSet.inverted
@@ -10,18 +11,13 @@ internal struct Scanner {
     let string : String
     let unicodeScalars : String.UnicodeScalarView
     var currentIndex : String.Index
-    var currentStyle : EnrichedTextStyle
-    var nofillCount : Int
-    var processNewlines : Bool {
-        return nofillCount == 0
-    }
+    var state : ScannerState
 
     public init(string: String) {
         self.string = string
         self.unicodeScalars = string.unicodeScalars
         self.currentIndex = string.startIndex
-        self.currentStyle = EnrichedTextStyle(options: [])
-        self.nofillCount = 0
+        self.state = ScannerState()
     }
 
     public var isComplete : Bool {
@@ -31,33 +27,36 @@ internal struct Scanner {
     }
 
     public mutating func scanComponent() throws -> EnrichedTextComponent? {
-
-        while (unicodeScalars[currentIndex] == "<") {
-            currentIndex = unicodeScalars.index(after: currentIndex)
-            if (unicodeScalars[currentIndex] == "<") {
-                // This is an escaped < character; treat it as text
-                break;
-            }
-            try scanAndProcessCommand()
+        while let (command, negation) = try scanCommand() {
+            try processCommand(command, negation: negation)
         }
 
         if currentIndex >= unicodeScalars.endIndex {
             return nil
         }
 
-        if (processNewlines && unicodeScalars[currentIndex] == "\n") {
+        if (state.processNewlines && unicodeScalars[currentIndex] == "\n") {
             currentIndex = unicodeScalars.index(after: currentIndex)
             if (unicodeScalars[currentIndex] != "\n") {
-                return EnrichedTextComponent(text: " ", style: currentStyle)
+                return EnrichedTextComponent(text: " ", style: state.style)
             }
         }
 
         let text = try scanText()
 
-        return EnrichedTextComponent(text: text, style: currentStyle)
+        return EnrichedTextComponent(text: text, style: state.style)
     }
 
-    private mutating func scanAndProcessCommand() throws {
+    private mutating func scanCommand() throws -> (command: Substring, negation: Bool)? {
+        if (unicodeScalars[currentIndex] != "<") {
+            return nil;
+        }
+        currentIndex = unicodeScalars.index(after: currentIndex)
+        if (unicodeScalars[currentIndex] == "<") {
+            // This is an escaped < character; treat it as text
+            return nil;
+        }
+
         let negation = (unicodeScalars[currentIndex] == "/")
         if (negation) {
             currentIndex = unicodeScalars.index(after: currentIndex)
@@ -74,35 +73,56 @@ internal struct Scanner {
         currentIndex = unicodeScalars.index(after: endIndex)
 
         let command = string[startIndex..<endIndex]
-        if (command.caseInsensitiveCompare("nofill") == .orderedSame) {
-            if (negation) {
-                nofillCount -= 1
-            } else {
-                nofillCount += 1
-            }
-            return
-        }
+        return (command, negation)
+    }
 
+    private mutating func processCommand(_ command: Substring, negation: Bool) throws {
         if (negation) {
-            currentStyle.negate(command: command)
+            if (!state.negate(command: command)) {
+                throw EnrichedText.Error.malformed(position: currentIndex, reason: "Unbalanced Command Tag")
+            }
         } else {
-            let param = try scanParam()
-            currentStyle.apply(command: command, param: param)
+            var param : Substring? = nil
+            var processNextCommand : Bool = true
+            let nextCommandObj = try scanCommand()
+            if let (nextCommand, nextCommandNegation) = nextCommandObj {
+                if (nextCommand.lowercased() == "param" && nextCommandNegation == false) {
+                    param = try scanParam()
+                    processNextCommand = false
+                }
+            }
+
+            do {
+                try state.apply(command: command, param: param)
+            } catch ScannerState.Error.missingParam {
+                throw EnrichedText.Error.malformed(position: currentIndex, reason: "\(command) command requires param")
+            } catch ScannerState.Error.invalidParam {
+                throw EnrichedText.Error.malformed(position: currentIndex, reason: "\(command) param invalid")
+            }
+
+            if (processNextCommand) {
+                if let (nextCommand, nextCommandNegation) = nextCommandObj {
+                    try processCommand(nextCommand, negation: nextCommandNegation)
+                }
+            }
         }
     }
 
-    private mutating func scanParam() throws -> Substring? {
-        if (unicodeScalars.suffix(from: currentIndex).starts(with: "<param>".unicodeScalars)) {
-            currentIndex = unicodeScalars.index(currentIndex, offsetBy:7)
-            let paramStartIndex = currentIndex
-            guard let closingParamRange = string.suffix(from: currentIndex).range(of:"</param>") else {
-                throw EnrichedText.Error.malformed(position: paramStartIndex, reason: "Expected </param> not found")
+    private mutating func scanParam() throws -> Substring {
+        let startIndex = currentIndex
+        var endIndex = currentIndex
+        while (currentIndex < unicodeScalars.endIndex) {
+            currentIndex = scanUpTo(characterSet: commandOpenCharacterSet)
+            endIndex = currentIndex
+            if let (command, negation) = try scanCommand() {
+                if (command.lowercased() == "param" && negation == true) {
+                    return string[startIndex..<endIndex]
+                }
+            } else {
+                currentIndex = unicodeScalars.index(after: currentIndex)
             }
-            let paramAfterEndIndex = closingParamRange.lowerBound
-            currentIndex = closingParamRange.upperBound
-            return string[paramStartIndex..<paramAfterEndIndex]
         }
-        return nil
+        throw EnrichedText.Error.malformed(position: startIndex, reason: "Expected </param> not found")
     }
 
     private mutating func scanText() throws -> Substring {
