@@ -2,7 +2,7 @@
 
 import Foundation
 
-public struct EnrichedTextColor : Equatable {
+public struct EnrichedTextColor: Equatable {
     public let red: UInt16
     public let green: UInt16
     public let blue: UInt16
@@ -16,7 +16,7 @@ public struct EnrichedTextColor : Equatable {
     }
 
     private init?(colorName: String) {
-        switch(colorName) {
+        switch colorName {
         case "red":
             self.init(red: UInt16.max, green: 0, blue: 0, alpha: UInt16.max)
             return
@@ -27,7 +27,7 @@ public struct EnrichedTextColor : Equatable {
             self.init(red: 0, green: UInt16.max, blue: 0, alpha: UInt16.max)
             return
         case "yellow":
-            self.init(red:  UInt16.max, green: UInt16.max, blue: 0, alpha: UInt16.max)
+            self.init(red: UInt16.max, green: UInt16.max, blue: 0, alpha: UInt16.max)
             return
         case "cyan":
             self.init(red: 0, green: UInt16.max, blue: UInt16.max, alpha: UInt16.max)
@@ -47,14 +47,14 @@ public struct EnrichedTextColor : Equatable {
     }
 
     private init?(stringComponents components: [String]) {
-        if (components.count < 3) {
+        if components.count < 3 {
             return nil
         }
 
-        guard let red = UInt16(components[0], radix:16),
-            let green = UInt16(components[1], radix:16),
-            let blue = UInt16(components[2], radix:16),
-            let alpha = components.count > 3 ? UInt16(components[3], radix:16) : UInt16.max else {
+        guard let red = UInt16(components[0], radix: 16),
+            let green = UInt16(components[1], radix: 16),
+            let blue = UInt16(components[2], radix: 16),
+            let alpha = components.count > 3 ? UInt16(components[3], radix: 16) : UInt16.max else {
                 return nil
         }
 
@@ -63,7 +63,7 @@ public struct EnrichedTextColor : Equatable {
 
     public init?(string: String) {
         let components = string.components(separatedBy: ",")
-        if (components.count == 1) {
+        if components.count == 1 {
             self.init(colorName: string)
         } else {
             self.init(stringComponents: components)

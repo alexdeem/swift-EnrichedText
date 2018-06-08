@@ -2,7 +2,7 @@
 
 import Foundation
 
-public struct EnrichedTextStyleOptions : OptionSet {
+public struct EnrichedTextStyleOptions: OptionSet {
     public let rawValue: Int
 
     public static let bold = EnrichedTextStyleOptions(rawValue: 1 << 0)
@@ -10,12 +10,12 @@ public struct EnrichedTextStyleOptions : OptionSet {
     public static let underline = EnrichedTextStyleOptions(rawValue: 1 << 2)
     public static let fixed = EnrichedTextStyleOptions(rawValue: 1 << 3)
 
-    public init(rawValue:Int) {
+    public init(rawValue: Int) {
         self.rawValue = rawValue
     }
 }
 
-public struct EnrichedTextStyle : Equatable {
+public struct EnrichedTextStyle: Equatable {
     public var options: EnrichedTextStyleOptions
     public var fontFamily: String?
     public var color: EnrichedTextColor?
