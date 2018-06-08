@@ -2,16 +2,16 @@
 
 import Foundation
 
-private let commandOpenCharacterSet = CharacterSet(charactersIn:"<")
-private let invertedPlainTextCharacterSet = CharacterSet(charactersIn:"<\n")
+private let commandOpenCharacterSet = CharacterSet(charactersIn: "<")
+private let invertedPlainTextCharacterSet = CharacterSet(charactersIn: "<\n")
 private let commandCharacterSet = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "-"))
 private let invertedCommandCharacterSet = commandCharacterSet.inverted
 
 internal struct Scanner {
-    let string : String
-    let unicodeScalars : String.UnicodeScalarView
-    var currentIndex : String.Index
-    var state : ScannerState
+    let string: String
+    let unicodeScalars: String.UnicodeScalarView
+    var currentIndex: String.Index
+    var state: ScannerState
 
     public init(string: String) {
         self.string = string
@@ -20,10 +20,8 @@ internal struct Scanner {
         self.state = ScannerState()
     }
 
-    public var isComplete : Bool {
-        get {
-            return currentIndex >= unicodeScalars.endIndex
-        }
+    public var isComplete: Bool {
+        return currentIndex >= unicodeScalars.endIndex
     }
 
     public mutating func scanComponent() throws -> EnrichedTextComponent? {
@@ -35,9 +33,9 @@ internal struct Scanner {
             return nil
         }
 
-        if (state.processNewlines && unicodeScalars[currentIndex] == "\n") {
+        if state.processNewlines && unicodeScalars[currentIndex] == "\n" {
             currentIndex = unicodeScalars.index(after: currentIndex)
-            if (unicodeScalars[currentIndex] != "\n") {
+            if unicodeScalars[currentIndex] != "\n" {
                 return EnrichedTextComponent(text: " ", style: state.style)
             }
         }
@@ -48,26 +46,26 @@ internal struct Scanner {
     }
 
     private mutating func scanCommand() throws -> (command: Substring, negation: Bool)? {
-        if (unicodeScalars[currentIndex] != "<") {
-            return nil;
+        if unicodeScalars[currentIndex] != "<" {
+            return nil
         }
         currentIndex = unicodeScalars.index(after: currentIndex)
-        if (unicodeScalars[currentIndex] == "<") {
+        if unicodeScalars[currentIndex] == "<" {
             // This is an escaped < character; treat it as text
-            return nil;
+            return nil
         }
 
         let negation = (unicodeScalars[currentIndex] == "/")
-        if (negation) {
+        if negation {
             currentIndex = unicodeScalars.index(after: currentIndex)
         }
 
         let startIndex = currentIndex
         let endIndex = scanUpTo(characterSet: invertedCommandCharacterSet)
-        if (endIndex == unicodeScalars.endIndex) {
+        if endIndex == unicodeScalars.endIndex {
             throw EnrichedText.Error.malformed(position: endIndex, reason: "Unterminated Command")
         }
-        if (unicodeScalars[endIndex] != ">") {
+        if unicodeScalars[endIndex] != ">" {
             throw EnrichedText.Error.malformed(position: endIndex, reason: "Unexpected Character in Command")
         }
         currentIndex = unicodeScalars.index(after: endIndex)
@@ -77,16 +75,16 @@ internal struct Scanner {
     }
 
     private mutating func processCommand(_ command: Substring, negation: Bool) throws {
-        if (negation) {
-            if (!state.negate(command: command)) {
+        if negation {
+            if !state.negate(command: command) {
                 throw EnrichedText.Error.malformed(position: currentIndex, reason: "Unbalanced Command Tag")
             }
         } else {
-            var param : Substring? = nil
-            var processNextCommand : Bool = true
+            var param: Substring? = nil
+            var processNextCommand: Bool = true
             let nextCommandObj = try scanCommand()
             if let (nextCommand, nextCommandNegation) = nextCommandObj {
-                if (nextCommand.lowercased() == "param" && nextCommandNegation == false) {
+                if nextCommand.lowercased() == "param" && nextCommandNegation == false {
                     param = try scanParam()
                     processNextCommand = false
                 }
@@ -100,7 +98,7 @@ internal struct Scanner {
                 throw EnrichedText.Error.malformed(position: currentIndex, reason: "\(command) param invalid")
             }
 
-            if (processNextCommand) {
+            if processNextCommand {
                 if let (nextCommand, nextCommandNegation) = nextCommandObj {
                     try processCommand(nextCommand, negation: nextCommandNegation)
                 }
@@ -111,11 +109,11 @@ internal struct Scanner {
     private mutating func scanParam() throws -> Substring {
         let startIndex = currentIndex
         var endIndex = currentIndex
-        while (currentIndex < unicodeScalars.endIndex) {
+        while currentIndex < unicodeScalars.endIndex {
             currentIndex = scanUpTo(characterSet: commandOpenCharacterSet)
             endIndex = currentIndex
             if let (command, negation) = try scanCommand() {
-                if (command.lowercased() == "param" && negation == true) {
+                if command.lowercased() == "param" && negation == true {
                     return string[startIndex..<endIndex]
                 }
             } else {
@@ -127,7 +125,7 @@ internal struct Scanner {
 
     private mutating func scanText() throws -> Substring {
         let startIndex = currentIndex
-        if (unicodeScalars[currentIndex] == "\n") {
+        if unicodeScalars[currentIndex] == "\n" {
             // Leading newlines are ok
             repeat {
                 currentIndex = unicodeScalars.index(after: currentIndex)
@@ -144,10 +142,10 @@ internal struct Scanner {
         var index = currentIndex
         while index < unicodeScalars.endIndex {
             let scalar = unicodeScalars[index]
-            if (characterSet.contains(scalar)) {
-                break;
+            if characterSet.contains(scalar) {
+                break
             }
-            index = unicodeScalars.index(after:index)
+            index = unicodeScalars.index(after: index)
         }
         return index
     }

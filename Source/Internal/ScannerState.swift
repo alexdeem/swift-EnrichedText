@@ -3,15 +3,15 @@
 import Foundation
 
 struct ScannerState {
-    public enum Error : Swift.Error {
+    public enum Error: Swift.Error {
         case missingParam
         case invalidParam
     }
 
-    var style : EnrichedTextStyle {
+    var style: EnrichedTextStyle {
         return stack.last!.style
     }
-    var processNewlines : Bool {
+    var processNewlines: Bool {
         return !stack.last!.nofill
     }
     private var stack: [ScannerStateItem]
@@ -20,11 +20,12 @@ struct ScannerState {
         self.stack = [ScannerStateItem(style: EnrichedTextStyle(), nofill: false, command: nil)]
     }
 
-    internal mutating func apply(command:Substring, param:Substring?) throws {
+    // swiftlint:disable cyclomatic_complexity
+    internal mutating func apply(command: Substring, param: Substring?) throws {
         var item = stack.last!
 
         item.command = command
-        switch (command.lowercased()) {
+        switch command.lowercased() {
         case "bold":
             item.style.options.insert(.bold)
         case "italic":
@@ -58,8 +59,9 @@ struct ScannerState {
 
         stack.append(item)
     }
+    // swiftlint:enable cyclomatic_complexity
 
-    internal mutating func negate(command:Substring) -> Bool {
+    internal mutating func negate(command: Substring) -> Bool {
         let item = stack.popLast()!
         // try exact match first, fallback to case-insensitive; this gives a ~8% improvement in the very common-case
         // that the open and close tags exactly match, at the cost of a ~8% degradation when they don't
@@ -68,8 +70,7 @@ struct ScannerState {
 }
 
 private struct ScannerStateItem {
-    var style : EnrichedTextStyle
-    var nofill : Bool
-    var command : Substring?
+    var style: EnrichedTextStyle
+    var nofill: Bool
+    var command: Substring?
 }
-
