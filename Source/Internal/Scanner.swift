@@ -48,6 +48,10 @@ internal struct Scanner {
     }
 
     private mutating func scanCommand() throws -> (command: Substring, negation: Bool)? {
+        guard !isComplete else {
+            return nil
+        }
+        
         if (unicodeScalars[currentIndex] != "<") {
             return nil;
         }
