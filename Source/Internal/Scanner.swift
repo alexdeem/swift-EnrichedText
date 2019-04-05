@@ -123,7 +123,9 @@ internal struct Scanner {
                     return string[startIndex..<endIndex]
                 }
             } else {
-                currentIndex = unicodeScalars.index(after: currentIndex)
+                if currentIndex < unicodeScalars.endIndex {
+                    currentIndex = unicodeScalars.index(after: currentIndex)
+                }
             }
         }
         throw EnrichedText.Error.malformed(position: startIndex, reason: "Expected </param> not found")
