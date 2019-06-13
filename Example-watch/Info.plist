@@ -26,7 +26,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>au.com.tabcorop.EnrichedTextExample</string>
+	<string>au.com.tabcorp.EnrichedTextExample</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

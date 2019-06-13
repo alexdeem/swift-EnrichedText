@@ -48,6 +48,10 @@ internal struct Scanner {
     }
 
     private mutating func scanCommand() throws -> (command: Substring, negation: Bool)? {
+        guard !isComplete else {
+            return nil
+        }
+        
         if (unicodeScalars[currentIndex] != "<") {
             return nil;
         }
@@ -119,7 +123,9 @@ internal struct Scanner {
                     return string[startIndex..<endIndex]
                 }
             } else {
-                currentIndex = unicodeScalars.index(after: currentIndex)
+                if currentIndex < unicodeScalars.endIndex {
+                    currentIndex = unicodeScalars.index(after: currentIndex)
+                }
             }
         }
         throw EnrichedText.Error.malformed(position: startIndex, reason: "Expected </param> not found")
